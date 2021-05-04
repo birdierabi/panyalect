@@ -1,0 +1,47 @@
+/**
+ * Adaptivity mixins
+ */
+$desktop: 1440px;
+$main: 1160px;
+$hovers: 1025px;
+$sm: 768px;
+$xs: 375px;
+
+@mixin desktop {
+  @media (max-width: $desktop) {
+    @content;
+  }
+}
+@mixin main {
+  @media (max-width: $main) {
+    @content;
+  }
+}
+@mixin hovers {
+  @media (min-width: $hovers) {
+    @content;
+  }
+}
+@mixin sm {
+  @media (max-width: $sm) {
+    @content;
+  }
+}
+@mixin xs {
+  @media (max-width: $xs) {
+    @content;
+  }
+}
+
+/**
+ * Font face mixin
+ */
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal, $display: swap) {
+  @font-face {
+    font-family: $font-family;
+    font-weight: $weight;
+    font-style: $style;
+    font-display: $display;
+    src: url('#{$file-path}.woff2') format('woff2'), url('#{$file-path}.woff') format('woff');
+  }
+}

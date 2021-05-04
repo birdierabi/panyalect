@@ -1,0 +1,40 @@
+// core
+@import 'variables/index';
+@import 'reset';
+@import 'mixins';
+@import 'utils';
+@import 'animation';
+
+// fonts
+@include font-face('Codec Pro', '~assets/fonts/CodecPro/CodecPro-Light', 300);
+@include font-face('Codec Pro', '~assets/fonts/CodecPro/CodecPro-Bold', 700);
+
+:root {
+  --primary-color: #012345;
+  --secondary-color: #f3f4f7;
+  --text-color: #677b8f;
+  --title-color:#012345;
+  --bg-color: #fcfcfc;
+  --logo-color: #012345;
+  --svg-color: #99A7B5;
+  --button-color: #4959ff;
+  --price-color: #f84ab3;
+}
+
+:root[data-theme="dark"] {
+  --secondary-color: #011c37;
+  --text-color: #fcfcfc;
+  --title-color:#fcfcfc;
+  --bg-color: #012345;
+  --logo-color: #fcfcfc;
+}
+
+// common styles
+body {
+  font-family: $font-family-default;
+  font-size: $font-size-default;
+  line-height: $line-height-default;
+  font-weight: $font-weight-light;
+  color: $color-text-regular;
+  background-color: var(--bg-color);
+}
