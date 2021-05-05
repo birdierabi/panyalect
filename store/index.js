@@ -6,7 +6,6 @@ export const modules = {
 
 export const state = () => ({
   vehicles: [],
-  selectedVehicle: null,
   options: ['whatever']
 })
 
@@ -25,6 +24,9 @@ export const mutations = {
 export const getters = {
   getOptions (state) {
     return [...state.options, ...new Set(state.vehicles.map(element => element.type))]
+  },
+  getItem: state => id => {
+    return state.vehicles.find(element => element.id === id)
   }
 }
 
