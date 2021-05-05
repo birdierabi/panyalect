@@ -1,8 +1,13 @@
 <template lang="pug">
   .page.wrapper.index
     .index-wrapper.wrapper
+      .top.flex.j-between.a-center
+        vSelect(:vehicles="vehicles" :options="getOptions" @update-select="optionSelect")
+        button.flex.a-center Add new
+          .icon
+            iconPlus
       .bottom
-        vCard(v-for="vehicle in vehicles",
+        vCard(v-for="vehicle in updateSelect",
           :vehicle="vehicle",
           :key="vehicle.id")
 </template>
@@ -12,7 +17,7 @@
 import iconPlus from '@/components/icons/icon-plus'
 import vCard from '@/components/card'
 import vSelect from '@/components/select'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'index-page',
@@ -21,10 +26,23 @@ export default {
     vCard,
     vSelect
   },
+  data () {
+    return {
+      activeSelect: 'whatever'
+    }
+  },
   computed: {
     ...mapState({
       vehicles: state => state.vehicles
-    })
+    }),
+    ...mapGetters(['getOptions']),
+    updateSelect () {
+      return (this.activeSelect === 'whatever')
+        ? this.vehicles
+        : this.vehicles.filter(
+          element => (element.type === this.activeSelect)
+        )
+    }
   },
   async asyncData ({ store, error }) {
     await store.dispatch('GET_VEHICLES')
@@ -36,6 +54,11 @@ export default {
         })
         return {}
       })
+  },
+  methods: {
+    optionSelect (selected) {
+      this.activeSelect = selected
+    }
   }
 }
 </script>
@@ -81,6 +104,16 @@ export default {
       height: 24px;
 
       color: var(--secondary-color);
+    }
+  }
+
+  .top {
+    margin-bottom: 40px;
+
+    button {
+      svg {
+        color: $color-secondary;
+      }
     }
   }
 

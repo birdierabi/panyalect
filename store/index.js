@@ -5,7 +5,9 @@ export const modules = {
 }
 
 export const state = () => ({
-  vehicles: []
+  vehicles: [],
+  selectedVehicle: null,
+  options: ['whatever']
 })
 
 export const actions = {
@@ -21,7 +23,9 @@ export const mutations = {
 }
 
 export const getters = {
-  //
+  getOptions (state) {
+    return [...state.options, ...new Set(state.vehicles.map(element => element.type))]
+  }
 }
 
 export default {
