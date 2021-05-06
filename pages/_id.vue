@@ -4,6 +4,11 @@
       img(:src="vehicle.image")
     .inner
       .title {{ vehicle.name }}
+      .information.flex
+        nuxt-link(:to="`/${$route.params.id}/specifications`") Specifications
+        nuxt-link(:to="`/${$route.params.id}/team`") Team
+        nuxt-link(:to="`/${$route.params.id}/terms`") Rent terms
+      nuxt-child(:vehicle="vehicle")
       .rent-inner
         .rent.flex.a-center.j-between
           .price Rent for
@@ -80,6 +85,36 @@ export default {
       color: var(--title-color);
     }
 
+    .information {
+      margin-bottom: 32px;
+
+      a {
+        margin-left: 16px;
+        margin-right: 16px;
+
+        font-size: 16px;
+        line-height: 14px;
+        font-weight: bold;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &:focus,
+        &:active {
+          color: var(--button-color);
+        }
+      }
+
+      a.nuxt-link-active {
+        color: $color-button;
+      }
+    }
+
     .rent {
       padding: 16px 32px;
 
@@ -99,6 +134,15 @@ export default {
 
         color: var(--price-color);
       }
+    }
+
+    .specification-component,
+    .team-component {
+      margin-bottom: 45px;
+    }
+
+    .team-component {
+      min-height: 409px;
     }
   }
 
@@ -135,6 +179,15 @@ export default {
         height: auto;
       }
 
+      .information {
+        margin-bottom: 20px;
+
+        a {
+          margin-left: 10px;
+          margin-right: 10px;
+        }
+      }
+
       .rent-inner {
         position: sticky;
         bottom: 0;
@@ -166,6 +219,11 @@ export default {
       .price {
         font-size: 16px;
         line-height: 140%;
+      }
+
+      .specification-component,
+      .team-component {
+        margin-bottom: 32px;
       }
     }
   }
