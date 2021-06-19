@@ -46,6 +46,7 @@ export default {
 
     background-color: transparent;
     outline: none;
+    cursor: pointer;
   }
 }
 

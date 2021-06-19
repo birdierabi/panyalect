@@ -28,6 +28,11 @@ export default {
   border-radius: 32px;
 
   cursor: pointer;
+  transition: 0.5s ease;
+
+  &:hover {
+    transform: scale(1.03);
+  }
 
   img {
     margin-right: 24px;
@@ -48,6 +53,7 @@ export default {
     font-weight: bold;
     font-size: 16px;
     line-height: 14px;
+    text-transform: uppercase;
     color: var(--title-color);
   }
 

@@ -55,7 +55,6 @@ export default {
     padding-bottom: 56px;
 
     .img-inner {
-      align-self: center;
       flex-basis: 73%;
       width: 100%;
       height: 100%;
