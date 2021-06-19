@@ -1,8 +1,8 @@
 import vehicles from './vehicles.json';
 
-/** True = 65%, False = 35% */
+/** True = 85%, False = 15% */
 const rejectByChance = () => {
-    return Math.random() <= 0.35;
+    return Math.random() <= 0.15;
 };
 
 /** Emulate request */
