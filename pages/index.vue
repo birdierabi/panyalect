@@ -3,20 +3,21 @@
     .index-wrapper.wrapper
       .top.flex.j-between.a-center
         vSelect(:vehicles="vehicles" :options="getOptions" @update-select="optionSelect")
-        button.flex.a-center Add new
+        button.flex.a-center(@click="openModal") Add new
           .icon
             iconPlus
       .bottom
         vCard(v-for="vehicle in updateSelect",
           :vehicle="vehicle",
           :key="vehicle.id")
+    vModal(v-show="isModalOpen" @close-modal="closeModal")
 </template>
 
 <script>
-
 import iconPlus from '@/components/icons/icon-plus'
 import vCard from '@/components/card'
 import vSelect from '@/components/select'
+import vModal from '@/components/modal'
 import { mapState, mapGetters } from 'vuex'
 
 export default {
@@ -24,10 +25,12 @@ export default {
   components: {
     iconPlus,
     vCard,
-    vSelect
+    vSelect,
+    vModal
   },
   data () {
     return {
+      isModalOpen: false,
       activeSelect: 'whatever'
     }
   },
@@ -37,16 +40,17 @@ export default {
     }),
     ...mapGetters(['getOptions']),
     updateSelect () {
-      return (this.activeSelect === 'whatever')
+      return this.activeSelect === 'whatever'
         ? this.vehicles
-        : this.vehicles.filter(
-          element => (element.type === this.activeSelect)
-        )
+        : this.vehicles.filter(element => element.type === this.activeSelect)
     }
   },
   async asyncData ({ store, error }) {
-    await store.dispatch('GET_VEHICLES')
-      .then(res => { store.commit('SET_VEHICLES', res) })
+    await store
+      .dispatch('GET_VEHICLES')
+      .then(res => {
+        store.commit('SET_VEHICLES', res)
+      })
       .catch(err => {
         error({
           statusCode: err.statusCode,
@@ -56,8 +60,14 @@ export default {
       })
   },
   methods: {
+    openModal () {
+      this.isModalOpen = true
+    },
     optionSelect (selected) {
       this.activeSelect = selected
+    },
+    closeModal () {
+      this.isModalOpen = !this.isModalOpen
     }
   }
 }
@@ -88,6 +98,7 @@ export default {
     cursor: pointer;
 
     background-color: transparent;
+    transition: 0.5s ease;
 
     .icon {
       display: block;
@@ -104,6 +115,17 @@ export default {
       height: 24px;
 
       color: var(--secondary-color);
+    }
+
+    &:focus,
+    &:active {
+      opacity: 0.5;
+    }
+
+    @include hovers {
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 

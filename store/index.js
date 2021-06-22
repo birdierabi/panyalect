@@ -18,6 +18,9 @@ export const actions = {
 export const mutations = {
   SET_VEHICLES (state, value) {
     state.vehicles = value
+  },
+  ADD_VEHICLE (state, value) {
+    state.vehicles = [...state.vehicles, value]
   }
 }
 

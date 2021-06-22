@@ -22,6 +22,8 @@ export default {
 .specialist-component {
   img {
     margin-bottom: 16px;
+    width: auto;
+    height: auto;
 
     border-radius: 16px;
   }
